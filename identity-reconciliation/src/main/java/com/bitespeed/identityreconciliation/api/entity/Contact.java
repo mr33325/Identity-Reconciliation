@@ -129,5 +129,12 @@ public class Contact implements Serializable {
 		this.deletedAt = deletedAt;
 	}
 
+	@Override
+	public String toString() {
+		return "Contact [id=" + id + ", phoneNumber=" + phoneNumber + ", email=" + email + ", linkedId=" + linkedId
+				+ ", linkPrecedence=" + linkPrecedence + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+				+ ", deletedAt=" + deletedAt + "]";
+	}
+
     
 }
