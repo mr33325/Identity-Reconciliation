@@ -3,9 +3,9 @@ server:
     servlet:
         context-path: /bitespeed
         
-spring.jpa.hibernate.ddl-auto: none
+spring.jpa.hibernate.ddl-auto: create
 spring.datasource.url: jdbc:mysql://localhost:3306/bitespeed
 spring.datasource.username: root
 spring.datasource.password: Root@1212
-spring.datasource.driver-class-name: com.mysql.jdbc.driver
+spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
 spring.jpa.show-sql: false
