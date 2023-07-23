@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 
-@ComponentScan(basePackages= {"com.bitespeed.identityreconsiliation.controller" , "com.bitespeed.identityreconsiliation.model"})
 @SpringBootApplication(exclude= {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 public class IdentityReconciliationApplication {
 

@@ -4,9 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import com.bitespeed.identityreconciliation.api.entity.Identity;
+import com.bitespeed.identityreconciliation.api.entity.Contact;
 
 @Repository
-public interface IdentityRepository extends JpaRepository<Identity, Long>, JpaSpecificationExecutor<Identity> {
+public interface IdentityRepository extends JpaRepository<Contact, Long>, JpaSpecificationExecutor<Contact> {
 
 }

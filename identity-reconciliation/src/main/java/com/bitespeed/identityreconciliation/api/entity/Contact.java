@@ -5,8 +5,8 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "identity")
-public class Identity implements Serializable {
+@Table(name = "contact")
+public class Contact implements Serializable {
 
     /**
 	 * 
@@ -48,11 +48,11 @@ public class Identity implements Serializable {
     }
 
     // Default constructor (required by JPA)
-    public Identity() {
+    public Contact() {
     }
 
     // Parameterized constructor (if needed)
-    public Identity(String phoneNumber, String email, Long linkedId, LinkPrecedence linkPrecedence, Date createdAt, Date updatedAt, Date deletedAt) {
+    public Contact(String phoneNumber, String email, Long linkedId, LinkPrecedence linkPrecedence, Date createdAt, Date updatedAt, Date deletedAt) {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.linkedId = linkedId;

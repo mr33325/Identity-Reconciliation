@@ -1,0 +1,18 @@
+package com.bitespeed.identityreconciliation.api.controller;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/identity-reconsiliation")
+public class IdentityController {
+	
+    @GetMapping("/ping")
+    public String identifyContact() {
+        // Cheking if the service is responding properly
+        return "pong";
+    }
+}
+
