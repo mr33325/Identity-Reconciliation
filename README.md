@@ -121,6 +121,8 @@ The web service uses the following dependencies:
 - Spring Data JPA: Provides support for data access using the Java Persistence API (JPA).
 - MySQL (or any other SQL database): Used for storing customer contact information.
 
-## Contact
+## Author
+
+This web service is authored by ***Mahesh Rana***.
 
 If you have any questions or need further assistance, please contact us at [rana.maheesh@gmail.com](mailto:rana.maheesh@gmail.com).
