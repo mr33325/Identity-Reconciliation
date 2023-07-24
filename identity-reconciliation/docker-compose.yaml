@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+
+  db:
+    image: "mysql:8.0"
+    restart: always
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: bitespeed
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: Root@1212
+      MYSQL_ROOT_PASSWORD: Root@1212
