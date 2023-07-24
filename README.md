@@ -67,7 +67,7 @@ If you are facing any issue you can follow the second method.
 - **Request Body:** JSON object with optional `email` and `phoneNumber` fields.
 - **Response:** JSON object with consolidated contact information.
 
-### ping Endpoint
+### Ping Endpoint
 
 - **URL:** `/identity-reconciliation/ping`
 - **Method:** GET
