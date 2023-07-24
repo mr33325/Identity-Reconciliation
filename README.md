@@ -50,20 +50,29 @@ There are two methods two run this application:
 
 If you are facing any issue you can follow the second method.
 
-1. Navigate to 
+1. Navigate to `Identity-Reconciliation\identity-reconciliation` folder.
   
-3. Run `Maven install` in eclipse or intellij disabling tests off.
+2. Run `Maven install` in eclipse or intellij disabling tests off. It will generate jar file in `target` folder.
 
-4. 
+3. You will also find a `docker-compose.yaml` file in that folder. Open cmd and run `docker-compose up`.
+
+4.  You can access the endpoints same as mentioned in method 1.
 
 ## Endpoint Documentation
 
-### Identify Customer Endpoint
+### Identify Endpoint
 
-- **URL:** `/identity-reconciliation/identify`
+- **URL:** `identity-reconsiliation/identify`
 - **Method:** POST
 - **Request Body:** JSON object with optional `email` and `phoneNumber` fields.
 - **Response:** JSON object with consolidated contact information.
+
+### ping Endpoint
+
+- **URL:** `/identity-reconciliation/ping`
+- **Method:** GET
+- **Request Body:** None.
+- **Response:** "pong".
 
 ## Dependencies
 
