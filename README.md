@@ -67,6 +67,44 @@ If you are facing any issue you can follow the second method.
 - **Request Body:** JSON object with optional `email` and `phoneNumber` fields.
 - **Response:** JSON object with consolidated contact information.
 
+```JavaScript
+
+var requestOptions = {
+  method: 'GET',
+  redirect: 'follow'
+};
+
+fetch("http://localhost:8080/bitespeed/identity-reconsiliation/ping", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
+```JavaScript
+
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "email": "lorraine@hillvalley.edu",
+  "phoneNumber": null
+});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("http://localhost:8080/bitespeed/identity-reconsiliation/identify", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
+
 ### Ping Endpoint
 
 - **URL:** `/identity-reconciliation/ping`
