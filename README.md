@@ -37,7 +37,7 @@ There are two methods two run this application:
 
 1. Navigate into the folder `Final-docker-file`.
 
-2. Open cmd in that folder.
+2. Open `cmd` in that folder.
 
 3. Run `docker-compose up`.
 
