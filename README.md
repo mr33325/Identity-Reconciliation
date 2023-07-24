@@ -69,20 +69,6 @@ If you are facing any issue you can follow the second method.
 
 ```JavaScript
 
-var requestOptions = {
-  method: 'GET',
-  redirect: 'follow'
-};
-
-fetch("http://localhost:8080/bitespeed/identity-reconsiliation/ping", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
-
-```
-
-```JavaScript
-
 var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
 
@@ -111,6 +97,20 @@ fetch("http://localhost:8080/bitespeed/identity-reconsiliation/identify", reques
 - **Method:** GET
 - **Request Body:** None.
 - **Response:** "pong".
+
+```JavaScript
+
+var requestOptions = {
+  method: 'GET',
+  redirect: 'follow'
+};
+
+fetch("http://localhost:8080/bitespeed/identity-reconsiliation/ping", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+```
 
 ## Dependencies
 
