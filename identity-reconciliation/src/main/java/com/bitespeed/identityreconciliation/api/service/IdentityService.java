@@ -32,7 +32,60 @@ public class IdentityService {
         IdentityResponse response = new IdentityResponse();
         // Create a new list to store the indices of contacts with LinkPrecedence set to PRIMARY
         List<Integer> primaryIndicesList = new ArrayList<>();
-        boolean pointToSameContactEntry= false;
+        
+        
+        //Check if the given contact information is already existing in the DB. If yes then return consolidated linked contact response
+        if(email!=null && phoneNumber!=null) {
+        	Contact foundByEmailAndPhone= contactRepository.findByPhoneNumberAndEmail(phoneNumber, email).orElse(null);
+        	if(foundByEmailAndPhone!=null) {
+        		if(foundByEmailAndPhone.getLinkPrecedence()==Contact.LinkPrecedence.PRIMARY) {
+        			primaryContact= foundByEmailAndPhone;
+        			secondaryContacts = contactRepository.findByLinkedId(primaryContact.getId());
+        	    	response.setContact(primaryContact, secondaryContacts);
+        	    	return response;
+        		}
+        		else {
+        			primaryContact= contactRepository.findById(foundByEmailAndPhone.getLinkedId()).orElse(null);
+        			secondaryContacts = contactRepository.findByLinkedId(primaryContact.getId());
+        	    	response.setContact(primaryContact, secondaryContacts);
+        	    	return response;
+        		}
+        	}
+        }
+        else if(email!=null && phoneNumber==null) {
+        	foundByEmail= contactRepository.findByEmail(email);
+        	if(!foundByEmail.isEmpty()) {
+        		if(foundByEmail.get(0).getLinkPrecedence()==Contact.LinkPrecedence.PRIMARY) {
+        			primaryContact= foundByEmail.get(0);
+        			secondaryContacts = contactRepository.findByLinkedId(primaryContact.getId());
+        	    	response.setContact(primaryContact, secondaryContacts);
+        	    	return response;
+        		}
+        		else {
+        			primaryContact= contactRepository.findById(foundByEmail.get(0).getLinkedId()).orElse(null);
+        			secondaryContacts = contactRepository.findByLinkedId(primaryContact.getId());
+        	    	response.setContact(primaryContact, secondaryContacts);
+        	    	return response;
+        		}
+        	}
+        }
+        else if(email==null && phoneNumber!=null) {
+        	foundByPhone= contactRepository.findByPhoneNumber(phoneNumber);
+        	if(!foundByPhone.isEmpty()) {
+        		if(foundByPhone.get(0).getLinkPrecedence()==Contact.LinkPrecedence.PRIMARY) {
+        			primaryContact= foundByPhone.get(0);
+        			secondaryContacts = contactRepository.findByLinkedId(primaryContact.getId());
+        	    	response.setContact(primaryContact, secondaryContacts);
+        	    	return response;
+        		}
+        		else {
+        			primaryContact= contactRepository.findById(foundByPhone.get(0).getLinkedId()).orElse(null);
+        			secondaryContacts = contactRepository.findByLinkedId(primaryContact.getId());
+        	    	response.setContact(primaryContact, secondaryContacts);
+        	    	return response;
+        		}
+        	}
+        }
         
         if(email!=null) {
         	foundByEmail= contactRepository.findByEmail(email);
@@ -82,7 +135,7 @@ public class IdentityService {
         
         
         if(foundByEmail.isEmpty() && foundByPhone.isEmpty()) {
-        	//This is a new contact, hence create a new entry in DB
+        	//This is a new contact, hence create a new entry in DB and return response
         	System.out.println("This is a new contact, hence create a new entry in DB");
 	    	Contact newContact= new Contact(phoneNumber, email, null, Contact.LinkPrecedence.PRIMARY, new Date(), new Date(), null);
 	    	
@@ -127,6 +180,7 @@ public class IdentityService {
         	System.out.println("Two different contact but pointing to same person");
         	
             linkedContacts.get(primaryIndicesList.get(1)).setLinkPrecedence(Contact.LinkPrecedence.SECONDARY);
+            linkedContacts.remove(primaryContact);
             for(int i=0; i<linkedContacts.size(); i++) {
             	if(linkedContacts.get(i).getLinkedId()!=primaryContact.getId()) {
             		linkedContacts.get(i).setLinkedId(primaryContact.getId());
@@ -151,55 +205,5 @@ public class IdentityService {
         
     }
     
-
-//    public IdentityResponse identifyContact1(IdentityRequest request) {
-//        String email = request.getEmail();
-//        String phoneNumber = request.getPhoneNumber();
-//
-//        Contact primaryContact;
-//        List<Contact> secondaryContacts = new ArrayList<>();
-//
-//        // Check if there is an existing contact with the given email
-//        if (email != null) {
-//            primaryContact = contactRepository.findByEmail(email).orElse(null);
-//            if (primaryContact == null) {
-//                // If no matching contact found, create a new primary contact
-//                primaryContact = new Contact(phoneNumber, email, null, Contact.LinkPrecedence.PRIMARY, new Date(), new Date(), null);
-//                primaryContact = contactRepository.save(primaryContact);
-//            } else {
-//                // If matching contact found, update the contact with new information (if any)
-//                if (!email.equals(primaryContact.getEmail())) {
-//                    primaryContact.setEmail(email);
-//                }
-//                if (!phoneNumber.equals(primaryContact.getPhoneNumber())) {
-//                    primaryContact.setPhoneNumber(phoneNumber);
-//                }
-//                primaryContact = contactRepository.save(primaryContact);
-//            }
-//        } else {
-//            // Check if there is an existing contact with the given phone number
-//            primaryContact = contactRepository.findByPhoneNumber(phoneNumber).orElse(null);
-//            if (primaryContact == null) {
-//                // If no matching contact found, create a new primary contact
-//                primaryContact = new Contact(phoneNumber, null, null, LinkPrecedence.PRIMARY, new Date(), new Date(), null);
-//                primaryContact = contactRepository.save(primaryContact);
-//            } else {
-//                // If matching contact found, update the contact with new information (if any)
-//                if (!phoneNumber.equals(primaryContact.getPhoneNumber())) {
-//                    primaryContact.setPhoneNumber(phoneNumber);
-//                }
-//                primaryContact = contactRepository.save(primaryContact);
-//            }
-//        }
-//
-//        // Find secondary contacts and add their IDs to the response
-//        if (primaryContact != null) {
-//            secondaryContacts = contactRepository.findByLinkedId(primaryContact.getId());
-//        }
-//
-//        IdentityResponse response = new IdentityResponse();
-//        response.setContact(primaryContact, secondaryContacts);
-//        return response;
-//    }
 }
 

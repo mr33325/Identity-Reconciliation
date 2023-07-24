@@ -38,9 +38,12 @@ public class IdentityResponse {
         uniqueSet = new HashSet<>(phones);
         phones= new ArrayList<>(uniqueSet);
         
+        List<Long> secondaryContactIds = secondaryContacts.stream().map(Contact::getId).collect(Collectors.toList());
+//        if(secondaryContactIds.contains(contactDTO.getPrimaryContactId()))
+//        	secondaryContactIds.remove(contactDTO.getPrimaryContactId());
+        
         contactDTO.setEmails(emails);
         contactDTO.setPhoneNumbers(phones);
-        List<Long> secondaryContactIds = secondaryContacts.stream().map(Contact::getId).collect(Collectors.toList());
         contactDTO.setSecondaryContactIds(secondaryContactIds);
         this.contact = contactDTO;
     }
