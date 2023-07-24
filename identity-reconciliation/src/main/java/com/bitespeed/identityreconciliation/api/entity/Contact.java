@@ -8,8 +8,8 @@ import javax.persistence.*;
 @Table(name = "contact")
 public class Contact implements Serializable {
 
-    /**
-	 * 
+	/**
+	 * Unique identifier for serialization purposes.
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -42,6 +42,9 @@ public class Contact implements Serializable {
     @Column(name = "deletedAt")
     private Date deletedAt;
 
+    /**
+     * Enum to represent the precedence of a linked contact (primary or secondary).
+     */
     public enum LinkPrecedence {
         PRIMARY,
         SECONDARY

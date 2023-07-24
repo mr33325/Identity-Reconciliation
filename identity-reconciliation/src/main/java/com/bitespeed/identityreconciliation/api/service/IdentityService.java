@@ -21,6 +21,12 @@ public class IdentityService {
     @Autowired
     private ContactRepository contactRepository;
 
+    /**
+     * Performs identity reconciliation based on the provided IdentityRequest.
+     *
+     * @param request The IdentityRequest containing email and/or phoneNumber for identification.
+     * @return IdentityResponse containing the consolidated contact details.
+     */
     public IdentityResponse identifyContact(IdentityRequest request) {
     	String email = request.getEmail();
         String phoneNumber = request.getPhoneNumber();

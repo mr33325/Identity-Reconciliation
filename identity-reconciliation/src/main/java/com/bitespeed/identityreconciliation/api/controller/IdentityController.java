@@ -19,12 +19,23 @@ public class IdentityController {
 	@Autowired
     private IdentityService identityService;
 	
+	/**
+     * Endpoint to check if the identity reconciliation service is responding properly.
+     * @return "pong" as a response indicating successful service availability.
+     */
     @GetMapping("/ping")
     public String identifyContact() {
         // Cheking if the service is responding properly
         return "pong";
     }
     
+    /**
+     * Endpoint to perform identity reconciliation based on the provided JSON payload.
+     * The request body should contain either an email or phoneNumber for identification.
+     *
+     * @param request The JSON request containing email or phoneNumber for identification.
+     * @return ResponseEntity with IdentityResponse containing the consolidated contact details.
+     */
     @PostMapping("/identify")
     public ResponseEntity<IdentityResponse> identifyContact(@RequestBody IdentityRequest request) {
         // Delegate the identity reconciliation logic to the service
