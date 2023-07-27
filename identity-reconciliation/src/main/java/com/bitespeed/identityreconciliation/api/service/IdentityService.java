@@ -93,6 +93,7 @@ public class IdentityService {
         	}
         }
         
+        // If not existing in the database, then create entry in db based on conditions
         if(email!=null) {
         	foundByEmail= contactRepository.findByEmail(email);
         	
